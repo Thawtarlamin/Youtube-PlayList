@@ -42,8 +42,6 @@ public class GetPlaylist {
                                                 models.setUrl(link);
                                                 onComplete.onComplete(models);
                                             }
-
-
                         }
                     }
 
