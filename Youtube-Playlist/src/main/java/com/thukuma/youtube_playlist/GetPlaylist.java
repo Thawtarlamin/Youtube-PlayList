@@ -36,30 +36,12 @@ public class GetPlaylist {
                             String title = e.select("strong[class=media-heading]").text();
                             String link = e.select("button[name=entry]").attr("value");
                             PlayListModels models = new PlayListModels();
-                            AndroidNetworking.get("https://dirpy.com/studio?url="+link+"&utm_source=freeonlinevideodownloader&utm_medium=form")
-                                    .build()
-                                    .getAsString(new StringRequestListener() {
-                                        @Override
-                                        public void onResponse(String response) {
-                                            Document doc = Jsoup.parse(response);
-                                            String video_url = doc.select("video[class=center-block]").select("source").attr("src");
-                                            String video_thum = doc.select("video[class=center-block]").attr("poster");
-                                            String video_title = doc.select("div[class=col-xs-10]").select("input[class=form-control]").attr("value");
-
-                                            if (!video_url.isEmpty()&&!video_thum.isEmpty()&&!video_title.isEmpty()){
+                                    if (!link.isEmpty()&&!img.isEmpty()&&! title.isEmpty()){
                                                 models.setImage("https:"+img);
                                                 models.setTitle("("+title);
-                                                models.setUrl(video_url);
+                                                models.setUrl(link);
                                                 onComplete.onComplete(models);
                                             }
-
-                                        }
-
-                                        @Override
-                                        public void onError(ANError anError) {
-                                            error.onError(anError.toString());
-                                        }
-                                    });
 
 
                         }
